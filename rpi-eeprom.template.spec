@@ -7,6 +7,8 @@ License:    custom, BSD-3
 URL:        https://github.com/Leuca/rpi-eeprom
 VCS:        {{{ git_dir_vcs }}}
 
+Requires:   binutils
+
 Source:     {{{ git_dir_pack }}}
 
 %description
