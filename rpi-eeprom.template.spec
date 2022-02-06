@@ -48,8 +48,7 @@ cp -r firmware/* %{buildroot}/lib/firmware/raspberrypi/bootloader
 
 # It is best to create the config with a script. This way the file should not be deleted if the package is uninstalled
 %post
-if [ -f /etc/default/rpi-eeprom-config ]; then
-else
+if [ ! -f /etc/default/rpi-eeprom-config ]; then
     echo "%default_config" > /etc/default/rpi-eeprom-config
 fi
 
