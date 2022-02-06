@@ -33,9 +33,9 @@ sed -i 's/nano/vi/g' rpi-eeprom-config
 mkdir -p %{buildroot}/%{_bindir}
 mkdir -p %{buildroot}/etc/config/
 mkdir -p %{buildroot}/lib/firmware/raspberrypi/bootloader/backup
-install -m 700 rpi-eeprom-update %{buildroot}/%{_bindir}
-install -m 700 rpi-eeprom-digest %{buildroot}/%{_bindir}
-install -m 700 rpi-eeprom-config %{buildroot}/%{_bindir}
+install -m 0700 rpi-eeprom-update %{buildroot}/%{_bindir}
+install -m 0700 rpi-eeprom-digest %{buildroot}/%{_bindir}
+install -m 0700 rpi-eeprom-config %{buildroot}/%{_bindir}
 cp -r firmware/* %{buildroot}/lib/firmware/raspberrypi/bootloader
 
 %files
@@ -55,7 +55,8 @@ FIRMWARE_IMAGE_DIR=\"\${FIRMWARE_ROOT}/\${FIRMWARE_RELEASE_STATUS}\"
 FIRMWARE_BACKUP_DIR=\"/var/lib/raspberrypi/bootloader/backup\"
 BOOTFS=/boot/efi
 USE_FLASHROM=0
-EEPROM_CONFIG_HOOK=" > /etc/default/rpi-eeprom-config
+EEPROM_CONFIG_HOOK=" > /etc/default/rpi-eeprom-update
+    chmod 0700 /etc/default/rpi-eeprom-update
 fi
 
 %changelog
