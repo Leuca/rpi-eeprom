@@ -25,10 +25,6 @@ This package contains scripts and binaries used to update the Raspberry Pi 4 boo
 sed -i 's/Use ${RPI_EEPROM_UPDATE_CONFIG_TOOL} to change the release.//g' rpi-eeprom-update
 # Change default editor from nano to vi
 sed -i 's/nano/vi/g' rpi-eeprom-config
-# Set BOOTFS to /boot/efi because with default Redhat system configuration that is the path where the FAT partition will be mounted on
-sed -i 's/BOOTFS=\/boot/BOOTFS=\/boot\/efi/g' rpi-eeprom-update
-# save configuration in a macro for later
-%global default_config %(cat rpi-eeprom-update-default)
 
 %install
 mkdir -p %{buildroot}/%{_bindir}
@@ -49,7 +45,14 @@ cp -r firmware/* %{buildroot}/lib/firmware/raspberrypi/bootloader
 # It is best to create the config with a script. This way the file should not be deleted if the package is uninstalled
 %post
 if [ ! -f /etc/default/rpi-eeprom-config ]; then
-    echo "%default_config" > /etc/default/rpi-eeprom-config
+    echo "
+    FIRMWARE_ROOT=/lib/firmware/raspberrypi/bootloader
+    FIRMWARE_RELEASE_STATUS=\"critical\"
+    FIRMWARE_IMAGE_DIR=\"\${FIRMWARE_ROOT}/\${FIRMWARE_RELEASE_STATUS}\"
+    FIRMWARE_BACKUP_DIR=\"/var/lib/raspberrypi/bootloader/backup\"
+    BOOTFS=/boot/efi
+    USE_FLASHROM=0
+    EEPROM_CONFIG_HOOK=" > /etc/default/rpi-eeprom-config
 fi
 
 %changelog
