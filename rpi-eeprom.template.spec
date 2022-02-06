@@ -10,7 +10,10 @@ License:    custom, BSD-3
 URL:        https://github.com/Leuca/rpi-eeprom
 VCS:        {{{ git_dir_vcs }}}
 
-Requires:   binutils
+Requires:   binutils vcgencmd vi
+Provides:   rpi-eeprom-config
+Provides:   rpi-eeprom-update
+Provides:   rpi-eeprom-digest
 
 Source:     {{{ git_dir_pack }}}
 
@@ -46,13 +49,13 @@ cp -r firmware/* %{buildroot}/lib/firmware/raspberrypi/bootloader
 %post
 if [ ! -f /etc/default/rpi-eeprom-config ]; then
     echo "
-    FIRMWARE_ROOT=/lib/firmware/raspberrypi/bootloader
-    FIRMWARE_RELEASE_STATUS=\"critical\"
-    FIRMWARE_IMAGE_DIR=\"\${FIRMWARE_ROOT}/\${FIRMWARE_RELEASE_STATUS}\"
-    FIRMWARE_BACKUP_DIR=\"/var/lib/raspberrypi/bootloader/backup\"
-    BOOTFS=/boot/efi
-    USE_FLASHROM=0
-    EEPROM_CONFIG_HOOK=" > /etc/default/rpi-eeprom-config
+FIRMWARE_ROOT=/lib/firmware/raspberrypi/bootloader
+FIRMWARE_RELEASE_STATUS=\"critical\"
+FIRMWARE_IMAGE_DIR=\"\${FIRMWARE_ROOT}/\${FIRMWARE_RELEASE_STATUS}\"
+FIRMWARE_BACKUP_DIR=\"/var/lib/raspberrypi/bootloader/backup\"
+BOOTFS=/boot/efi
+USE_FLASHROM=0
+EEPROM_CONFIG_HOOK=" > /etc/default/rpi-eeprom-config
 fi
 
 %changelog
