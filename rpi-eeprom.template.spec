@@ -1,3 +1,6 @@
+# building debug stuff for this package is essentially useless
+%global debug_package %{nil}
+
 Name:       {{{ git_dir_name }}}
 Version:    {{{ git_dir_version }}}
 Release:    %{?dist}
