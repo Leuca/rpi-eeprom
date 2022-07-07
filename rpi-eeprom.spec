@@ -10,6 +10,8 @@ License:    custom, BSD-3
 URL:        https://github.com/Leuca/rpi-eeprom
 VCS:        {{{ git_dir_vcs }}}
 
+BuildRequires: systemd-rpm-macros
+
 Requires:   binutils vcgencmd vi
 Provides:   rpi-eeprom-config
 Provides:   rpi-eeprom-update
