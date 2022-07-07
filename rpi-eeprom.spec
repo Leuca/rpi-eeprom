@@ -30,12 +30,14 @@ sed -i 's/Use ${RPI_EEPROM_UPDATE_CONFIG_TOOL} to change the release.//g' rpi-ee
 sed -i 's/nano/vi/g' rpi-eeprom-config
 
 %install
-mkdir -p %{buildroot}/%{_bindir}
+mkdir -p %{buildroot}%{_bindir}
 mkdir -p %{buildroot}/etc/config/
 mkdir -p %{buildroot}/lib/firmware/raspberrypi/bootloader/backup
-install -m 0700 rpi-eeprom-update %{buildroot}/%{_bindir}
-install -m 0700 rpi-eeprom-digest %{buildroot}/%{_bindir}
-install -m 0700 rpi-eeprom-config %{buildroot}/%{_bindir}
+mkdir -p %{buildroot}%{_unitdir}
+install -m 0700 rpi-eeprom-update %{buildroot}%{_bindir}
+install -m 0700 rpi-eeprom-digest %{buildroot}%{_bindir}
+install -m 0700 rpi-eeprom-config %{buildroot}%{_bindir}
+install -m 0644 rpi-eeprom-update.service %{buildroot}%{_unitdir}
 cp -r firmware/* %{buildroot}/lib/firmware/raspberrypi/bootloader
 
 %files
@@ -43,6 +45,7 @@ cp -r firmware/* %{buildroot}/lib/firmware/raspberrypi/bootloader
 %{_bindir}/rpi-eeprom-update
 %{_bindir}/rpi-eeprom-digest
 %{_bindir}/rpi-eeprom-config
+%{_unitdir}/rpi-eeprom-update.service
 /lib/firmware/raspberrypi/*
 
 # It is best to create the config with a script. This way the file should not be deleted if the package is uninstalled
