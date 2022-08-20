@@ -3,7 +3,7 @@
 
 Name:       {{{ git_dir_name }}}
 Version:    {{{ git_dir_version }}}
-Release:    %{?dist}
+Release:    1%{?dist}
 Summary:    This is a test package.
 
 License:    custom, BSD-3
