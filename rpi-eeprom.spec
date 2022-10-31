@@ -3,7 +3,7 @@
 
 Name:           {{{ git_dir_name }}}
 Version:        {{{ git_dir_version lead=0.0 follow=0 }}}
-Release:        2%{?dist}
+Release:        3%{?dist}
 Summary:        This is a test package.
 
 License:        custom, BSD-3
@@ -12,7 +12,9 @@ VCS:            {{{ git_dir_vcs }}}
 
 BuildRequires:  systemd-rpm-macros
 
-Requires:       binutils vcgencmd vi
+Requires:       binutils
+Requires:       vi
+Requires:       rpi-userland
 Provides:       rpi-eeprom-config
 Provides:       rpi-eeprom-update
 Provides:       rpi-eeprom-digest
