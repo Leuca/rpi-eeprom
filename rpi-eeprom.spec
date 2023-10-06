@@ -97,12 +97,12 @@ cp -r firmware-2712/* %{buildroot}/lib/firmware/raspberrypi/bootloader-2712
 %ghost /lib/firmware/raspberrypi/bootloader-2712/release-notes.md
 
 # Symlink the new bootloader folders to the legacy folder
-%post       -n bootloader-2711
+%posttrans  -n bootloader-2711
 if [ ! -L /lib/firmware/raspberrypi/bootloader ]; then
     ln -s -T /lib/firmware/raspberrypi/bootloader-2711 /lib/firmware/raspberrypi/bootloader
 fi
 
-%post       -n bootloader-2712
+%posttrans  -n bootloader-2712
 if [ ! -L /lib/firmware/raspberrypi/bootloader ]; then
     ln -s -T /lib/firmware/raspberrypi/bootloader-2712 /lib/firmware/raspberrypi/bootloader
 fi
