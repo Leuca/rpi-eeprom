@@ -98,26 +98,26 @@ cp -r firmware-2712/* %{buildroot}/lib/firmware/raspberrypi/bootloader-2712
 
 # Symlink the new bootloader folders to the legacy folder
 %posttrans  -n bootloader-2711
-if [ ! -L /lib/firmware/raspberrypi/bootloader ]; then
-    ln -s -T /lib/firmware/raspberrypi/bootloader-2711 /lib/firmware/raspberrypi/bootloader
+if [ ! -e /lib/firmware/raspberrypi/bootloader ]; then
+    ln -s -T bootloader-2711 /lib/firmware/raspberrypi/bootloader
 fi
 
 %posttrans  -n bootloader-2712
-if [ ! -L /lib/firmware/raspberrypi/bootloader ]; then
-    ln -s -T /lib/firmware/raspberrypi/bootloader-2712 /lib/firmware/raspberrypi/bootloader
+if [ ! -e /lib/firmware/raspberrypi/bootloader ]; then
+    ln -s -T bootloader-2712 /lib/firmware/raspberrypi/bootloader
 fi
 
 # Remove bootloader folder symlink if we are uninstalling
 %postun     -n bootloader-2711
 if [ -L /lib/firmware/raspberrypi/bootloader ]; then
-    rm -f /lib/firmware/raspberrypi/bootloader
-    rm -d /lib/firmware/raspberrypi
+    unlink /lib/firmware/raspberrypi/bootloader 2>&1 > /dev/null
+    rm -d /lib/firmware/raspberrypi 2>&1 > /dev/null
 fi
 
 %postun     -n bootloader-2712
 if [ -L /lib/firmware/raspberrypi/bootloader ]; then
-    rm -f /lib/firmware/raspberrypi/bootloader
-    rm -d /lib/firmware/raspberrypi
+    unlink /lib/firmware/raspberrypi/bootloader 2>&1 > /dev/null
+    rm -d /lib/firmware/raspberrypi 2>&1 > /dev/null
 fi
 
 %changelog
