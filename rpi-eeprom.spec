@@ -14,7 +14,7 @@ BuildRequires:  systemd-rpm-macros
 
 Requires:       binutils
 Requires:       vi
-Requires:       rpi-userland
+Requires:       vcgencmd
 Requires:       (bootloader-2711 or bootloader-2712)
 Provides:       rpi-eeprom-config
 Provides:       rpi-eeprom-update
@@ -44,8 +44,7 @@ Recommends:     %{name}
 Summary:        Bootloader binaries for Raspberry Pi 5
 
 %description    -n bootloader-2712
-This package contains binaries used to update the Raspberry Pi 5 bootloader and
-VLI USB controller EEPROMs.
+This package contains binaries used to update the Raspberry Pi 5 bootloader
 
 %prep
 {{{ git_dir_setup_macro }}}
