@@ -1,0 +1,3 @@
+function get_verdate() {
+	git --no-pager log -1 --format="%as" | sed 's/-//g'
+}

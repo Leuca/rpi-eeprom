@@ -2,7 +2,7 @@
 %global debug_package %{nil}
 
 Name:           {{{ git_dir_name }}}
-Version:        {{{ git_dir_version lead=0.0 follow=0 }}}
+Version:        {{{ get_verdate }}}
 Release:        1%{?dist}
 Summary:        Update scripts for Raspberry Pi bootloader
 
