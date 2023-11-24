@@ -54,14 +54,9 @@ This package contains binaries used to update the Raspberry Pi 5 bootloader
 sed -i 's/Use ${RPI_EEPROM_UPDATE_CONFIG_TOOL} to change the release./Change the release by editing \/etc\/default\/rpi-eeprom-update/g' rpi-eeprom-update
 # Change default editor from nano to vi
 sed -i 's/nano/vi/g' rpi-eeprom-config
-# Create the configuration file
-echo "FIRMWARE_ROOT=/lib/firmware/raspberrypi/bootloader
-FIRMWARE_RELEASE_STATUS=\"critical\"
-FIRMWARE_IMAGE_DIR=\"\${FIRMWARE_ROOT}/\${FIRMWARE_RELEASE_STATUS}\"
-FIRMWARE_BACKUP_DIR=\"/var/lib/raspberrypi/bootloader/backup\"
-BOOTFS=/boot/efi
-USE_FLASHROM=0
-EEPROM_CONFIG_HOOK=" > rpi-eeprom-update.conf
+# Customize configuration file
+sed -i '/BOOTFS/d' rpi-eeprom-update-default
+echo "BOOTFS=/boot/efi" >> rpi-eeprom-update-default
 
 %install
 mkdir -p %{buildroot}%{_bindir}
@@ -74,7 +69,7 @@ install -m 0700 rpi-eeprom-update %{buildroot}%{_bindir}
 install -m 0700 rpi-eeprom-digest %{buildroot}%{_bindir}
 install -m 0700 rpi-eeprom-config %{buildroot}%{_bindir}
 install -m 0644 rpi-eeprom-update.service %{buildroot}%{_unitdir}
-install -m 0700 rpi-eeprom-update.conf %{buildroot}%{_sysconfdir}/default/rpi-eeprom-update
+install -m 0700 rpi-eeprom-update-default %{buildroot}%{_sysconfdir}/default/rpi-eeprom-update
 cp -r firmware-2711/* %{buildroot}/lib/firmware/raspberrypi/bootloader-2711
 cp -r firmware-2712/* %{buildroot}/lib/firmware/raspberrypi/bootloader-2712
 
