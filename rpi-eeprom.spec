@@ -103,16 +103,17 @@ if [ ! -e /lib/firmware/raspberrypi/bootloader ]; then
 fi
 
 # Remove bootloader folder symlink if we are uninstalling
+# $1 holds how many packages will be left after the transactions
 %postun     -n bootloader-2711
-if [ -L /lib/firmware/raspberrypi/bootloader ]; then
-    unlink /lib/firmware/raspberrypi/bootloader 2>&1 > /dev/null
-    rm -d /lib/firmware/raspberrypi 2>&1 > /dev/null
+if [ $1 -eq 0 ]; then
+    unlink /lib/firmware/raspberrypi/bootloader || :
+    rm -d /lib/firmware/raspberrypi || :
 fi
 
 %postun     -n bootloader-2712
-if [ -L /lib/firmware/raspberrypi/bootloader ]; then
-    unlink /lib/firmware/raspberrypi/bootloader 2>&1 > /dev/null
-    rm -d /lib/firmware/raspberrypi 2>&1 > /dev/null
+if [ $1 -eq 0 ]; then
+    unlink /lib/firmware/raspberrypi/bootloader || :
+    rm -d /lib/firmware/raspberrypi || :
 fi
 
 %changelog
