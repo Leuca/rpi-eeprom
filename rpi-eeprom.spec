@@ -16,6 +16,7 @@ Requires:       binutils
 Requires:       vi
 Requires:       vcgencmd
 Requires:       (bootloader-2711 or bootloader-2712)
+Requires:       flashrom
 Provides:       rpi-eeprom-config
 Provides:       rpi-eeprom-update
 Provides:       rpi-eeprom-digest
