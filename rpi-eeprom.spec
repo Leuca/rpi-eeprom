@@ -38,7 +38,7 @@ Summary:        Bootloader binaries for Raspberry Pi 4
 This package contains binaries used to update the Raspberry Pi 4 bootloader and VLI USB controller EEPROMs.
 
 %package        -n bootloader-2712
-Requires:       boot-rpi5-config
+Requires:       (boot-rpi5-config or uboot-rpi5-config or edk2-rpi5)
 Conflicts:      bootloader-2711
 Recommends:     %{name}
 
