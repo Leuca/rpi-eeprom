@@ -1,6 +1,11 @@
 # Raspberry Pi5 bootloader EEPROM release notes
 
-## 2024-07-30: Optimized SDRAM timings for Pi5 8GB (default)
+## 2024-07-30: Promote the 2024-07-30 release to default (default)
+
+## 2024-08-14 - (recovery.bin) Add support for OTP metadata (latest)
+* Update to recovery.bin to output metadata about OTP during rpiboot
+
+## 2024-07-30: Optimized SDRAM timings for Pi5 8GB (latest)
 * Optimize all-banks/per-bank refresh timings for Pi5 8GB
 * Improve compatibility for booting from some USB SD card readers
     https://github.com/raspberrypi/rpi-eeprom/issues/527
@@ -9,7 +14,7 @@
   Also requires pciex4_reset=0 in config.txt
   earlycon=pl011,0x1f00030000,115200n8
 
-## 2024-07-25: Support CM4 nEXTRST on CM5
+## 2024-07-25: Support CM4 nEXTRST on CM5 (latest)
 * Drive nEXTRST on CM5 for CM4IO compatibility.
 * Preliminary changes for CM5 Lite.
 
