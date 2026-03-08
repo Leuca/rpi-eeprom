@@ -17,6 +17,8 @@ Requires:       vi
 Requires:       vcgencmd
 Requires:       (bootloader-2711 or bootloader-2712)
 Requires:       flashrom
+Requires:       python3-pycryptodomex
+Requires:       xxd
 Provides:       rpi-eeprom-config
 Provides:       rpi-eeprom-update
 Provides:       rpi-eeprom-digest
@@ -67,10 +69,14 @@ mkdir -p %{buildroot}/lib/firmware/raspberrypi/bootloader-2712/backup
 mkdir -p %{buildroot}%{_unitdir}
 mkdir -p %{buildroot}%{_sysconfdir}/default
 install -m 0700 rpi-eeprom-update %{buildroot}%{_bindir}
-install -m 0700 rpi-eeprom-digest %{buildroot}%{_bindir}
+install -m 0755 rpi-eeprom-digest %{buildroot}%{_bindir}
 install -m 0700 rpi-eeprom-config %{buildroot}%{_bindir}
 install -m 0644 rpi-eeprom-update.service %{buildroot}%{_unitdir}
 install -m 0700 rpi-eeprom-update-default %{buildroot}%{_sysconfdir}/default/rpi-eeprom-update
+install -m 0755 update-pieeprom.sh %{buildroot}%{_bindir}/update-pieeprom
+install -m 0755 tools/rpi-sign-bootcode %{buildroot}%{_bindir}
+install -m 0755 tools/rpi-bootloader-key-convert %{buildroot}%{_bindir}
+install -m 0700 tools/rpi-otp-private-key %{buildroot}%{_bindir}
 cp -r firmware-2711/* %{buildroot}/lib/firmware/raspberrypi/bootloader-2711
 cp -r firmware-2712/* %{buildroot}/lib/firmware/raspberrypi/bootloader-2712
 
@@ -80,6 +86,10 @@ cp -r firmware-2712/* %{buildroot}/lib/firmware/raspberrypi/bootloader-2712
 %{_bindir}/rpi-eeprom-update
 %{_bindir}/rpi-eeprom-digest
 %{_bindir}/rpi-eeprom-config
+%{_bindir}/update-pieeprom
+%{_bindir}/rpi-sign-bootcode
+%{_bindir}/rpi-bootloader-key-convert
+%{_bindir}/rpi-otp-private-key
 %{_unitdir}/rpi-eeprom-update.service
 %config(noreplace) %{_sysconfdir}/default/rpi-eeprom-update
 
