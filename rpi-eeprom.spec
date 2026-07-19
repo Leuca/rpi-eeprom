@@ -19,6 +19,7 @@ Requires:       (bootloader-2711 or bootloader-2712)
 Requires:       flashrom
 Requires:       python3-pycryptodomex
 Requires:       xxd
+Requires:       pciutils
 Provides:       rpi-eeprom-config
 Provides:       rpi-eeprom-update
 Provides:       rpi-eeprom-digest
